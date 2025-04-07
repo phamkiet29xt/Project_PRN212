@@ -1,0 +1,216 @@
+USE [PROJECT_PRN212]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Account](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Username] [varchar](255) NOT NULL,
+	[Password] [varchar](255) NOT NULL,
+	[Role] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Class]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Class](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Class] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Dish]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dish](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Price] [decimal](10, 2) NOT NULL,
+	[Decription] [nvarchar](255) NOT NULL,
+	[CreatedBy] [int] NOT NULL,
+	[CreatedAt] [datetime] NOT NULL,
+ CONSTRAINT [PK_Dish] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Dish_Menu]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Dish_Menu](
+	[DishId] [int] NOT NULL,
+	[MenuId] [int] NOT NULL,
+ CONSTRAINT [PK_Dish_Menu] PRIMARY KEY CLUSTERED 
+(
+	[DishId] ASC,
+	[MenuId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Menu]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Menu](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [date] NOT NULL,
+	[MealTime] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Menu] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Parent]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Parent](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Mobile] [varchar](10) NOT NULL,
+	[Email] [varchar](255) NOT NULL,
+	[AccountId] [int] NOT NULL,
+ CONSTRAINT [PK_Parent] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Payment]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Payment](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[PaymentDate] [date] NOT NULL,
+	[Status] [varchar](50) NOT NULL,
+	[Amount] [decimal](10, 2) NOT NULL,
+	[ParentId] [int] NOT NULL,
+ CONSTRAINT [PK_Payment] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Registration]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Registration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RegistrationDate] [date] NOT NULL,
+	[Status] [varchar](50) NOT NULL,
+	[StudentId] [int] NOT NULL,
+	[MenuId] [int] NOT NULL,
+ CONSTRAINT [PK_Registration] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Staff]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Staff](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Mobile] [varchar](10) NOT NULL,
+	[Email] [varchar](255) NOT NULL,
+	[AccountId] [int] NOT NULL,
+ CONSTRAINT [PK_Staff] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Student]    Script Date: 4/7/2025 8:57:18 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Student](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NOT NULL,
+	[Birthdate] [date] NOT NULL,
+	[Gender] [bit] NOT NULL,
+	[ClassId] [int] NOT NULL,
+	[ParentId] [int] NULL,
+ CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Dish]  WITH CHECK ADD  CONSTRAINT [FK_Dish_Staff] FOREIGN KEY([CreatedBy])
+REFERENCES [dbo].[Staff] ([Id])
+GO
+ALTER TABLE [dbo].[Dish] CHECK CONSTRAINT [FK_Dish_Staff]
+GO
+ALTER TABLE [dbo].[Dish_Menu]  WITH CHECK ADD  CONSTRAINT [FK_Dish_Menu_Dish] FOREIGN KEY([DishId])
+REFERENCES [dbo].[Dish] ([Id])
+GO
+ALTER TABLE [dbo].[Dish_Menu] CHECK CONSTRAINT [FK_Dish_Menu_Dish]
+GO
+ALTER TABLE [dbo].[Dish_Menu]  WITH CHECK ADD  CONSTRAINT [FK_Dish_Menu_Menu] FOREIGN KEY([MenuId])
+REFERENCES [dbo].[Menu] ([Id])
+GO
+ALTER TABLE [dbo].[Dish_Menu] CHECK CONSTRAINT [FK_Dish_Menu_Menu]
+GO
+ALTER TABLE [dbo].[Parent]  WITH CHECK ADD  CONSTRAINT [FK_Parent_Account] FOREIGN KEY([AccountId])
+REFERENCES [dbo].[Account] ([Id])
+GO
+ALTER TABLE [dbo].[Parent] CHECK CONSTRAINT [FK_Parent_Account]
+GO
+ALTER TABLE [dbo].[Payment]  WITH CHECK ADD  CONSTRAINT [FK_Payment_Parent] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[Parent] ([Id])
+GO
+ALTER TABLE [dbo].[Payment] CHECK CONSTRAINT [FK_Payment_Parent]
+GO
+ALTER TABLE [dbo].[Registration]  WITH CHECK ADD  CONSTRAINT [FK_Registration_Menu] FOREIGN KEY([MenuId])
+REFERENCES [dbo].[Menu] ([Id])
+GO
+ALTER TABLE [dbo].[Registration] CHECK CONSTRAINT [FK_Registration_Menu]
+GO
+ALTER TABLE [dbo].[Registration]  WITH CHECK ADD  CONSTRAINT [FK_Registration_Student] FOREIGN KEY([StudentId])
+REFERENCES [dbo].[Student] ([Id])
+GO
+ALTER TABLE [dbo].[Registration] CHECK CONSTRAINT [FK_Registration_Student]
+GO
+ALTER TABLE [dbo].[Staff]  WITH CHECK ADD  CONSTRAINT [FK_Staff_Account] FOREIGN KEY([AccountId])
+REFERENCES [dbo].[Account] ([Id])
+GO
+ALTER TABLE [dbo].[Staff] CHECK CONSTRAINT [FK_Staff_Account]
+GO
+ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Class] FOREIGN KEY([ClassId])
+REFERENCES [dbo].[Class] ([Id])
+GO
+ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Class]
+GO
+ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Parent] FOREIGN KEY([ParentId])
+REFERENCES [dbo].[Parent] ([Id])
+GO
+ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Parent]
+GO
